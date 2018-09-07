@@ -6,7 +6,7 @@
  * 		Project			: RFID-MFRC522
  * 		Description		: Use MFRC522 Read and Write Mifare Card.
  * 		Author			: www.freenove.com
- * 		Date			: 2016/09/20
+ * 		Date			: 2018/09/08
  */
 
 #include <stdio.h>
@@ -24,9 +24,10 @@ int main(int argc, char **argv) {
 	MFRC522_Status_t ret;
 	//Recognized card ID
 	uint8_t CardID[5] = { 0x00, };
+	uint8_t tagType[16] = {0x00,};
 	static char command_buffer[1024];
 
-	ret = MFRC522_Init('A');
+	ret = MFRC522_Init('B');
 	if (ret < 0) {
 		perror("Failed to initialize");
 		exit(-1);
@@ -40,22 +41,23 @@ int main(int argc, char **argv) {
 
 		scanf("%s", command_buffer);
 		if (strcmp(command_buffer, "scan") == 0) {
-			puts("Scanning");
+			puts("Scanning ... ");
 			while (1) {
-				ret = MFRC522_Check(CardID);
-				if (ret != MI_OK) {
-					printf(".");
-					fflush(stdout);
-					continue;
-				}
-				ret |= tag_select(CardID);
+				ret = MFRC522_Request(PICC_REQIDL, tagType);
 				if (ret == MI_OK) {
-					ret = scan_loop(CardID);
-					if (ret < 0) {
-						goto END_SCAN;
-					} else if (ret == 1) {
-						goto HALT;
-					}
+					printf("Card detected!\r\n");	
+					ret = MFRC522_Anticoll(CardID);	
+					if(ret == MI_OK){
+						ret = tag_select(CardID);
+						if (ret == MI_OK) {
+							ret = scan_loop(CardID);
+							if (ret < 0) {
+								goto END_SCAN;
+							} else if (ret == 1) {
+								goto HALT;
+							}
+						}
+					}								
 				}
 			}
 			END_SCAN: printf("Card error...");
@@ -116,7 +118,7 @@ int scan_loop(uint8_t *CardID) {
 			printf(
 					"Usage:\r\n" "\tread <blockstart>\r\n" "\tdump\r\n" "\thalt\r\n" 
 						"\tclean <blockaddr>\r\n" "\twrite <blockaddr> <data>\r\n");
-			return 0;
+			//return 0;
 		}
 	}
 	return 0;
@@ -125,7 +127,7 @@ int scan_loop(uint8_t *CardID) {
 int tag_select(uint8_t *CardID) {
 	int ret_int;
 	printf(
-			"Card detected    0x%02X 0x%02X 0x%02X 0x%02X, Check Sum = 0x%02X\r\n",
+			"Card UID: 0x%02X 0x%02X 0x%02X 0x%02X, Check Sum = 0x%02X\r\n",
 			CardID[0], CardID[1], CardID[2], CardID[3], CardID[4]);
 	ret_int = MFRC522_SelectTag(CardID);
 	if (ret_int == 0) {

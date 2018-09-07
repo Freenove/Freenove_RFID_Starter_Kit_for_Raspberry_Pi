@@ -18,6 +18,7 @@
  */
 #include "mfrc522.h"
 #include <stdint.h>
+#include <wiringPi.h>
 /* HAL prototypes*/
 void MFRC522_HAL_init(void);
 void MFRC522_HAL_write(unsigned char addr, unsigned char val);
@@ -26,11 +27,16 @@ void MFRC522_HAL_Delay(unsigned int ms);
 
 /* HAL prototypes end */
 static int Checking_Card = 0;
+
 int MFRC522_Setup(char Type){
+	wiringPiSetup();
+	pinMode(6,OUTPUT);
+	digitalWrite(6,HIGH);
 	MFRC522_Reset();
 	MFRC522_HAL_Delay(200);
 
-	MFRC522_WriteRegister(MFRC522_REG_T_PRESCALER, 0x3E);
+	//MFRC522_WriteRegister(MFRC522_REG_T_PRESCALER, 0x3E);
+#define NOTEST
 #ifndef NOTEST
 	{
 		/* test read and write reg functions */
@@ -42,10 +48,12 @@ int MFRC522_Setup(char Type){
 	}
 #endif
 	MFRC522_WriteRegister(MFRC522_REG_T_MODE, 0x8D);
+	MFRC522_WriteRegister(MFRC522_REG_T_PRESCALER, 0x3E);
 	MFRC522_WriteRegister(MFRC522_REG_T_RELOAD_L, 30);
 	MFRC522_WriteRegister(MFRC522_REG_T_RELOAD_H, 0);
 	MFRC522_WriteRegister(MFRC522_REG_TX_AUTO, 0x40);
 	MFRC522_WriteRegister(MFRC522_REG_MODE, 0x3D);
+	
 	if (Type == 'A') {
 		MFRC522_ClearBitMask(MFRC522_REG_STATUS2, 0x08);
 		MFRC522_WriteRegister(MFRC522_REG_MODE, 0x3D);
@@ -132,8 +140,9 @@ MFRC522_Status_t MFRC522_Request(uint8_t reqMode, uint8_t* TagType) {
 	MFRC522_WriteRegister(MFRC522_REG_BIT_FRAMING, 0x07);//TxLastBists = BitFramingReg[2..0]	???
 
 	TagType[0] = reqMode;
+	
 	status = MFRC522_ToCard(PCD_TRANSCEIVE, TagType, 1, TagType, &backBits);
-
+	
 	if ((status != MI_OK)) {
 		return status;
 	}
@@ -192,14 +201,14 @@ MFRC522_Status_t MFRC522_ToCard(uint8_t command, uint8_t* sendData,
 		if (Checking_Card) {
 			MFRC522_HAL_Delay(16);
 		} else {
-			MFRC522_HAL_Delay(2);
+			MFRC522_HAL_Delay(20);
 		}
 		n = MFRC522_ReadRegister(MFRC522_REG_COMM_IRQ);
 		i--;
 	} while ((i != 0) && !(n & 0x01) && !(n & waitIRq));
 
 	MFRC522_ClearBitMask(MFRC522_REG_BIT_FRAMING, 0x80);		//StartSend=0
-
+	
 	if (i != 0) {
 		if (!(MFRC522_ReadRegister(MFRC522_REG_ERROR) & 0x1B)) {
 
