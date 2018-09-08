@@ -35,8 +35,8 @@ int MFRC522_Setup(char Type){
 	MFRC522_Reset();
 	MFRC522_HAL_Delay(200);
 
-	//MFRC522_WriteRegister(MFRC522_REG_T_PRESCALER, 0x3E);
-#define NOTEST
+	MFRC522_WriteRegister(MFRC522_REG_T_PRESCALER, 0x3E);
+//#define NOTEST
 #ifndef NOTEST
 	{
 		/* test read and write reg functions */

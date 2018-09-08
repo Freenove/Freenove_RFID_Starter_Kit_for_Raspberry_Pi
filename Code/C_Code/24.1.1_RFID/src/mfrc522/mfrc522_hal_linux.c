@@ -24,7 +24,7 @@ static struct spi_ioc_transfer spixfr;
 
 static uint32_t mode = SPI_MODE_0;
 static uint8_t bits = 8;
-static uint32_t speed = 10000000;
+static uint32_t speed = 100000;
 static void pabort(const char *s)
 {
 	perror(s);

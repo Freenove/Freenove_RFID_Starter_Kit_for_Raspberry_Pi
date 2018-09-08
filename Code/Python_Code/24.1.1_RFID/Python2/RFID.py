@@ -3,7 +3,7 @@
 # Filename    : RFID.py
 # Description : Use MFRC522 read and write Mifare Card.
 # auther      : www.freenove.com
-# modification: 2016/09/20
+# modification: 2018/09/08
 ########################################################################
 import RPi.GPIO as GPIO
 import MFRC522
@@ -21,12 +21,14 @@ def setup():
 	pass
 	
 def loop():
+	global mfrc
 	while(True):
 		dis_ConmandLine()
 		inCmd = raw_input()
 		print inCmd
 		if (inCmd == "scan"):
 			print "Scanning ... "
+			mfrc = MFRC522.MFRC522()
 			isScan = True
 			while isScan:
 				# Scan for cards    

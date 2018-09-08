@@ -261,6 +261,8 @@ extern MFRC522_Status_t MFRC522_Auth(uint8_t authMode, uint8_t BlockAddr, uint8_
 extern MFRC522_Status_t MFRC522_Read(uint8_t blockAddr, uint8_t* recvData);
 extern MFRC522_Status_t MFRC522_Write(uint8_t blockAddr, uint8_t* writeData);
 extern void MFRC522_Halt(void);
+extern void MFRC522_WakeUp(void);
+extern void MFRC522_HAL_Delay(unsigned int ms);
 
 char *MFRC522_TypeToString(PICC_TYPE_t type);
 int MFRC522_ParseType(uint8_t TagSelectRet);

@@ -20,6 +20,7 @@
 
 int scan_loop(uint8_t *CardID);
 int tag_select(uint8_t *CardID);
+
 int main(int argc, char **argv) {
 	MFRC522_Status_t ret;
 	//Recognized card ID
@@ -52,16 +53,22 @@ int main(int argc, char **argv) {
 						if (ret == MI_OK) {
 							ret = scan_loop(CardID);
 							if (ret < 0) {
-								goto END_SCAN;
+								printf("Card error...\r\n");
+								break;
 							} else if (ret == 1) {
-								goto HALT;
+								puts("Halt...\r\n");
+								break;
 							}
 						}
+					}
+					else{
+						printf("Get Card ID failed!\r\n");
 					}								
 				}
+				MFRC522_Halt();
 			}
-			END_SCAN: printf("Card error...");
-			HALT: puts("Halt");
+			MFRC522_Halt();
+			MFRC522_Init('B');
 		} else if (strcmp(command_buffer, "quit") == 0
 				|| strcmp(command_buffer, "exit") == 0) {
 			return 0;
@@ -84,6 +91,7 @@ int scan_loop(uint8_t *CardID) {
 		scanf("%s", input);
 		puts((char*)input);
 		if (strcmp(input, "halt") == 0) {
+			MFRC522_Halt();
 			return 1;
 		} else if (strcmp(input, "dump") == 0) {
 			if (MFRC522_Debug_CardDump(CardID) < 0)
