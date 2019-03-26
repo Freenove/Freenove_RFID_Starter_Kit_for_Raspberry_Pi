@@ -6,7 +6,7 @@
  * 		Project			: RFID-MFRC522
  * 		Description		: Use MFRC522 Read and Write Mifare Card.
  * 		Author			: www.freenove.com
- * 		Date			: 2018/09/08
+ * 		Date			: 2019/03/26
  */
 
 #include <stdio.h>
@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 
 	ret = MFRC522_Init('B');
 	if (ret < 0) {
-		perror("Failed to initialize");
+		printf("Failed to initialize.\r\nProgram exit.\r\n");
 		exit(-1);
 	}
 

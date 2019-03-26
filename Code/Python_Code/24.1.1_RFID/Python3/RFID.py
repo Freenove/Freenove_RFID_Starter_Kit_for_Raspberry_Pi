@@ -3,7 +3,7 @@
 # Filename    : RFID.py
 # Description : Use MFRC522 read and write Mifare Card.
 # auther      : www.freenove.com
-# modification: 2018/09/08
+# modification: 2019/03/26
 ########################################################################
 import RPi.GPIO as GPIO
 import MFRC522

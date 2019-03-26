@@ -112,7 +112,10 @@ class MFRC522:
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(22, GPIO.OUT)
     GPIO.output(self.NRSTPD, 1)
-    self.MFRC522_Init()
+    if(self.MFRC522_Init()<0):
+      print "MFRC522 Init Failed!"
+      GPIO.cleanup()
+      exit(0)
   
   def MFRC522_Reset(self):
     self.Write_MFRC522(self.CommandReg, self.PCD_RESETPHASE)
@@ -409,8 +412,13 @@ class MFRC522:
   def MFRC522_Init(self):
     GPIO.output(self.NRSTPD, 1)
   
-    self.MFRC522_Reset();
+    self.MFRC522_Reset()
+    time.sleep(0.3)
     
+    self.Write_MFRC522(self.TPrescalerReg, 0x3E)
+    checkValue=self.Read_MFRC522(self.TPrescalerReg)
+    if(checkValue != 0x3E):
+      return -1
     
     self.Write_MFRC522(self.TModeReg, 0x8D)
     self.Write_MFRC522(self.TPrescalerReg, 0x3E)
@@ -420,3 +428,4 @@ class MFRC522:
     self.Write_MFRC522(self.TxAutoReg, 0x40)
     self.Write_MFRC522(self.ModeReg, 0x3D)
     self.AntennaOn()
+    return 0
