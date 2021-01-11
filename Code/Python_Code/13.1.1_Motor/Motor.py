@@ -62,9 +62,10 @@ def loop():
         value = adc.analogRead(0) # read ADC value of channel 0
         print ('ADC Value : %d'%(value))
         motor(value)
-        time.sleep(0.01)
+        time.sleep(0.2)
 
 def destroy():
+    p.stop()  # stop PWM
     GPIO.cleanup()
     
 if __name__ == '__main__':  # Program entrance
