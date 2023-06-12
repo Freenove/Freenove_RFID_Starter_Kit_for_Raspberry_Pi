@@ -6,7 +6,7 @@
  * 		Project			: RFID-MFRC522
  * 		Description		: Use MFRC522 Read and Write Mifare Card.
  * 		Author			: www.freenove.com
- * 		Date			: 2019/03/26
+ * 		Date			: 2021/1/1
  */
 
 #include <stdio.h>

@@ -11,6 +11,11 @@ class MFRC522:
   
   MAX_LEN = 16
   
+  MI_OK       = 0
+  MI_NOTAGERR = 1
+  MI_ERR      = 2
+
+  
   PCD_IDLE       = 0x00
   PCD_AUTHENT    = 0x0E
   PCD_RECEIVE    = 0x08
@@ -33,9 +38,6 @@ class MFRC522:
   PICC_TRANSFER  = 0xB0
   PICC_HALT      = 0x50
   
-  MI_OK       = 0
-  MI_NOTAGERR = 1
-  MI_ERR      = 2
   
   Reserved00     = 0x00
   CommandReg     = 0x01
