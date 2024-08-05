@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 
-from gpiozero import OutputDevice
-import spi
+import spidev 
 import signal
 import time
-
-RST = OutputDevice(25)  
-
+  
 class MFRC522:
   NRSTPD = 22
   
@@ -111,22 +108,20 @@ class MFRC522:
     
   serNum = []
   
-  def __init__(self, dev='/dev/spidev0.0', spd=1000000):
-    spi.openSPI(device=dev,speed=spd)
-    RST.on()
-    if(self.MFRC522_Init()<0):
-      print ("MFRC522 Init Failed!")
-      RST.close()
-      exit(0)
+  def __init__(self, bus=0,dev=0, spd=1000000):
+    self.spi=spidev.SpiDev()
+    self.spi.open(bus=bus,device=dev)
+    self.spi.max_speed_hz=spd
+    self.MFRC522_Init()
   
   def MFRC522_Reset(self):
     self.Write_MFRC522(self.CommandReg, self.PCD_RESETPHASE)
   
   def Write_MFRC522(self, addr, val):
-    spi.transfer(((addr<<1)&0x7E,val))
+    self.spi.writebytes(((addr<<1)&0x7E,val))
   
   def Read_MFRC522(self, addr):
-    val = spi.transfer((((addr<<1)&0x7E) | 0x80,0))
+    val = self.spi.xfer2((((addr<<1)&0x7E) | 0x80,0))
     return val[1]
   
   def SetBitMask(self, reg, mask):
@@ -412,15 +407,8 @@ class MFRC522:
         i = i+1
 
   def MFRC522_Init(self):
-#     GPIO.output(self.NRSTPD, 1)
-    RST.on()
-  
+
     self.MFRC522_Reset();
-    
-    self.Write_MFRC522(self.TPrescalerReg, 0x3E)
-    checkValue=self.Read_MFRC522(self.TPrescalerReg)
-    if(checkValue != 0x3E):
-      return -1
     
     self.Write_MFRC522(self.TModeReg, 0x8D)
     self.Write_MFRC522(self.TPrescalerReg, 0x3E)
