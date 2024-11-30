@@ -1,7 +1,7 @@
 /*
  * dump.h
  *
- *  Created on: 2014年9月7日
+ *  Created on: 2014/9/7
  *      Author: gitetsu
  */
 
