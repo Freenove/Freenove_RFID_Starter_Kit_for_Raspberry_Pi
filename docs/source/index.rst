@@ -2,9 +2,17 @@
 Freenove RFID Starter Kit for Raspberry Pi
 ######################################################
 
-.. toctree::
-   :maxdepth: 2
-   :caption: FNK0025
-   :glob:
+FNK0025
+******************************************************
 
-   fnk0025/fnk0025.rst
+Select the language you want to use.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: language
+    
+   fnk0025/c-lang-tutorial.rst
+   fnk0025/python-tutorial.rst
+   fnk0025/processing-tutorial.rst
+   fnk0025/java-tutorial.rst
+   fnk0025/scratch-tutorial.rst
