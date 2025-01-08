@@ -55,6 +55,9 @@ int main(void)
 		}
 		digitalWrite(ledPin,ledState);
 		lastbuttonState = reading;
+
+		// Add a small delay to reduce CPU usage
+		delay(10);
 	}
 
 	return 0;
