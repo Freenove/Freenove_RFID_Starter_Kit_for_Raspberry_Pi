@@ -17,7 +17,7 @@ In this project, we will use RC522 RFID card reader to read and write the M1-S50
 |                                                  |    |RC522|                                      |
 |3. Breadboard x1                                  |                                                 |
 +--------------------------------------------------+                                                 |
-|Jumper Wires x4                                   |                                                 |          
+|Jumper Wires x7                                   |                                                 |          
 |                                                  |                                                 |  
 | |jumper-wire|                                    |                                                 |  
 +--------------------------------------------------+-------------------------------------------------+
@@ -213,6 +213,7 @@ For more details about how to set data blocks and control blocks, please refer t
 By default, after verifying password A or password B, we can do reading or writing operation to data blocks. And after verifying password A, we can do reading or writing operation to control blocks. But password A can never be read, so if you choose to verify password A but forget the password A, the block will never be able to read again.
 
 .. hint:: 
+    
     :red:`If you have any concerns, please contact us via:` support@freenove.com
 
 For Mifare1 S50 card equipped in Freenove RFID Kit, the default password A and B are both FFFFFFFFFFFF. 
@@ -267,7 +268,7 @@ Code
 
 The project code uses human-computer interaction command line mode to read and write the M1-S50 card.
 
-Python Code 34.1.1 RFID
+Python Code RFID
 ----------------------------------------------------------------
 
 There are two code files for this project. They are respectively under Python2 folder and Python3 folder. :red:`Their functions are the same, but they are not compatible.` Code under Python2 folder can only run on Python2. And code under Python3 folder can only run on Python3.
@@ -275,13 +276,14 @@ There are two code files for this project. They are respectively under Python2 f
 First observe the project result, and then learn about the code in detail.
 
 .. hint:: 
+    
     :red:`If you have any concerns, please contact us via:`  support@freenove.com
 
 1.	Use cd command to enter RFID directory of Python code.
 
 .. code-block:: console
 
-    $ cd ~/Freenove_Kit/Code/Python_GPIOZero_Code/34.1.1_RFID
+    $ cd ~/Freenove_Kit/Code/Python_GPIOZero_Code/24.1.1_RFID
 
 2.	Use python command to execute code "RFID.py".
 
@@ -340,7 +342,7 @@ Command “halt” is used to quit the selection state of the card.
 
 The following is the program code :
 
-.. literalinclude:: ../../../freenove_Kit/Code/Python_GPIOZero_Code/34.1.1_RFID/RFID.py
+.. literalinclude:: ../../../freenove_Kit/Code/Python_GPIOZero_Code/24.1.1_RFID/RFID.py
     :linenos: 
     :language: python
 
@@ -352,17 +354,18 @@ In the code, first create an MFRC522 class object.
 
 In the function loop, wait for the command input. If command "scan" is received, the function will begin to detect whether there is a card close to the sensing area. If a card is detected, the card will be selected and card UID will be acquired. Then enter the function scan_loop (). If command "quit" or "exit" is received, the program will exit.
 
-.. literalinclude:: ../../../freenove_Kit/Code/Python_GPIOZero_Code/34.1.1_RFID/RFID.py
+.. literalinclude:: ../../../freenove_Kit/Code/Python_GPIOZero_Code/24.1.1_RFID/RFID.py
     :linenos: 
     :language: python
     :lines: 32-57
+    :dedent:
 
 The function cmdloop() will detect command read, write, clean, halt, dump and do the corresponding processing to each command. The functions of each command and the method have been introduced before.
 
-.. literalinclude:: ../../../freenove_Kit/Code/Python_GPIOZero_Code/34.1.1_RFID/RFID.py
+.. literalinclude:: ../../../freenove_Kit/Code/Python_GPIOZero_Code/24.1.1_RFID/RFID.py
     :linenos: 
     :language: python
     :lines: 59-138
+    :dedent:
 
 The file "MFRC522.py" contains the associated operation method for the MFRC522. You can open the file to view all the definitions and functions.
-

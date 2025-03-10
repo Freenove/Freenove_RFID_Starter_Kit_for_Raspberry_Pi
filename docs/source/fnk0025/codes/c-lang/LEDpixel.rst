@@ -2,7 +2,6 @@
 Chapter LEDpixelRotary Encoder
 ##############################################################################
 
-
 In this chapter, we will learn Freenove 8 RGB LED Module.
 
  .. note::
@@ -19,7 +18,7 @@ Component List
 
 +--------------------------------------------------+-------------------------------------------------+
 |1. Raspberry Pi (with 40 GPIO) x1                 |                                                 |
-|                                                  | Jumper Wires x7                                 |
+|                                                  | Jumper Wires x4                                 |
 |2. GPIO Extension Board & Ribbon Cable x1         |                                                 |
 |                                                  |  |jumper-wire|                                  |
 |3. Breadboard x1                                  |                                                 |
@@ -79,11 +78,10 @@ Circuit
 .. |LEDpixel_Sc| image:: ../_static/imgs/LEDpixel_Sc.png
 .. |LEDpixel_Fr| image:: ../_static/imgs/LEDpixel_Fr.png
 
-
 .. _additional supplements:
 
 Additional supplement 
-================================================================
+======================================
 
 Raspbery Pi, other than 4B and 400, nees to disable the audio module, othewise the LED will not work properly.
 
@@ -133,7 +131,7 @@ If you want to restart the audio module, just restore the content modified in th
 Code
 ================================================================
 
-C Code 32.1.1 Ledpixel
+C Code Ledpixel
 ----------------------------------------------------------------
 
 Before running C code, please install WS281X library.
@@ -165,6 +163,7 @@ First, observe the project result, and then learn about the code in detail.
 .. code-block:: console    
     
     $ cd ~/Freenove_Kit/Code/C_Code/32.1.1_Ledpixel
+
 2.	Use following command to compile " Ledpixel.cpp" and generate executable file "Ledpixel". 
 
 .. code-block:: console    
@@ -177,13 +176,14 @@ First, observe the project result, and then learn about the code in detail.
     
     $ sudo ./Ledpixel
 
-After the program runs, the LEDpixel will emit red, blue and green colors in turn like flowing water. If your Freenove 8 RGB LED Module doesn't work, you can try :ref:`additional supplements` to solve.
+After the program runs, the LEDpixel will emit red, blue and green colors in turn like flowing water. If your Freenove 8 RGB LED Module doesn't work, you can try :ref:`additional supplements <additional supplements>` to solve.
 
 The following is the program code:
 
-.. literalinclude:: ../../../freenove_Kit/Code/C_Code/32.1.1_Ledpixel/Ledpixel.c
+.. literalinclude:: ../../../freenove_Kit/Code/C_Code/32.1.1_Ledpixel/Ledpixel.cpp
     :linenos: 
     :language: C
+    :dedent:
 
 Include "Freenove_WS2812_Lib_for_Raspberry_Pi.hpp"
 
@@ -193,12 +193,13 @@ Include "Freenove_WS2812_Lib_for_Raspberry_Pi.hpp"
 
 Create the object of the class and set the brightness to 50%. The eight LEDs will then light up red, green and blue in turn.
 
-.. literalinclude:: ../../../freenove_Kit/Code/C_Code/32.1.1_Ledpixel/Ledpixel.c
+.. literalinclude:: ../../../freenove_Kit/Code/C_Code/32.1.1_Ledpixel/Ledpixel.cpp
     :linenos: 
     :language: C
     :lines: 24-42
+    :dedent:
 
-Project 32.2 RainbowLight
+Project RainbowLight
 ****************************************************************
 
 In this project, we will learn to control the LED module with a potentiometer.
@@ -218,9 +219,6 @@ Component List
 |  |LEDpixel|                    |   |Rotary-potentiometer|            |  |ADC-module-2|             |
 +--------------------------------+-------------------------------------+-----------------------------+
 
-.. |jumper-wire| image:: ../_static/imgs/jumper-wire.png
-.. |LEDpixel| image:: ../_static/imgs/LEDpixel.png
-    :width: 60%
 .. |Rotary-potentiometer| image:: ../_static/imgs/Rotary-potentiometer.png
     :width: 60%
 .. |ADC-module-2| image:: ../_static/imgs/ADC-module-2.png
@@ -247,7 +245,7 @@ Circuit
 Code
 ================================================================
 
-C Code 32.2.1 RainbowLight
+C Code RainbowLight
 ----------------------------------------------------------------
 
 If you did not configure I2C, please refer to :ref:`Chapter 7<ADC>`. If you did, please continue.
@@ -282,6 +280,7 @@ The following is the program code:
 .. literalinclude:: ../../../freenove_Kit/Code/C_Code/32.2.1_RainbowLight/RainbowLight.cpp
     :linenos: 
     :language: C
+    :dedent:
 
 This function converts HSL colors to RGB colors.
 
@@ -289,6 +288,7 @@ This function converts HSL colors to RGB colors.
     :linenos: 
     :language: C
     :lines: 14-33
+    :dedent:
 
 Read the ADC value of channel 2 in an infinite loop. Let the color of the eight LEDs change according to the value of the ADC.
 
@@ -296,9 +296,9 @@ Read the ADC value of channel 2 in an infinite loop. Let the color of the eight 
     :linenos: 
     :language: C
     :lines: 54-64
+    :dedent:
 
-
-Project 32.2 SpiLEDpixel
+Project SpiLEDpixel
 ****************************************************************
 
 This project will control ledpixel to display any color by the Raspberry Pi's SPI.
@@ -317,10 +317,6 @@ Component List
 |                                                                                                    |
 |  |LEDpixel|                                                                                        |
 +----------------------------------------------------------------------------------------------------+
-
-.. |jumper-wire| image:: ../_static/imgs/jumper-wire.png
-.. |LEDpixel| image:: ../_static/imgs/LEDpixel.png
-    :width: 40%
 
 Component knowledge
 ================================================================
@@ -399,6 +395,7 @@ The installation is complete as shown in the following figure.
 
 
 .. hint:: 
+    
     :red:`If you have any concerns, please contact us via:` support@freenove.com
 
 Additional supplement 
@@ -454,7 +451,7 @@ If your Raspberry PI is Raspberry PI 3, add it at the bottom:
 Code
 ================================================================
 
-C Code 32.3.1 SpiLedpixel
+C Code SpiLedpixel
 ----------------------------------------------------------------
 
 Use cd command to enter 32.3.1_SpiLedpixel directory of C code.
@@ -471,8 +468,8 @@ Use following command to compile " Ledpixel.cpp" and generate executable file "L
 
 Run the generated file "main". **Please use one of the following commands to control the ledpixel**.
 
-
 After the program runs, the led pixels will emit red, blue and green three colors in turn like water. If your Freenove 8 RGB LED module is not working, you can try additional supplements to fix it.
+
 .. code-block:: console  
     
     $ sudo ./main RGB
@@ -494,14 +491,17 @@ The following is the program code:
 .. literalinclude:: ../../../freenove_Kit/Code/C_Code/32.3.1_SpiLedpixel/SpiLedpixel.cpp
     :linenos: 
     :language: C
+    :dedent:
 
 .. code-block:: c   
+    :linenos:
 
     #include "Freenove_WS2812_SPI.h"
 
 To create Ledpixel objects, you can use the default parameters or you can use custom parameters.
 
 .. code-block:: c   
+    :linenos:
 
     //Freenove_WS2812_SPI strip = Freenove_WS2812_SPI(8, TYPE_GRB);//led_count, led_type
     Freenove_WS2812_SPI strip = Freenove_WS2812_SPI();//led_count=8, led_type=TYPE_GRB
@@ -509,6 +509,7 @@ To create Ledpixel objects, you can use the default parameters or you can use cu
 Create an interrupt event if the user presses Ctrl+C to turn off the lights before exiting the program.
 
 .. code-block:: c  
+    :linenos:
 
     void Ctrl_C_Handler(int value){
         strip.end();
@@ -521,6 +522,7 @@ Create an interrupt event if the user presses Ctrl+C to turn off the lights befo
 Initialize ledpixel, set the brightness value of the color light to 20, set the type of the color light to GRB type.
 
 .. code-block:: c  
+    :linenos:
 
     //Init ledpixel
     strip.begin();
@@ -533,6 +535,7 @@ Determine the number of parameters when the executable file is invoked. If no pa
     :linenos: 
     :language: C
     :lines: 24-32
+    :dedent:
 
 If the parameter is RGB, let the ledpixel display color one by one, and then switch to another color in turn, and continue to repeat the process.
 
@@ -540,6 +543,7 @@ If the parameter is RGB, let the ledpixel display color one by one, and then swi
     :linenos: 
     :language: C
     :lines: 33-47
+    :dedent:
 
 If the parameter is Rainbow, let the ledpixel display a rainbow of colors and turn slowly.
 
@@ -547,6 +551,7 @@ If the parameter is Rainbow, let the ledpixel display a rainbow of colors and tu
     :linenos: 
     :language: C
     :lines: 48-57
+    :dedent:
 
 If the parameter is Breathing, let the ledpixel gradually turn on one color, slowly turn off, then switch to another color, and repeat the process.
 
@@ -554,3 +559,4 @@ If the parameter is Breathing, let the ledpixel gradually turn on one color, slo
     :linenos: 
     :language: C
     :lines: 58-78
+    :dedent:
