@@ -242,9 +242,11 @@ Enable SPI
 
 The SPI interface of raspberry pi is closed by default. You need to open it manually. You can enable the SPI interface in the following way.
 
+Type the following command in the terminal:
+
 .. code-block:: console    
     
-    $ Type the following command in the terminal:
+    $ sudo raspi-config
 
 Then open the following dialog box:
 
