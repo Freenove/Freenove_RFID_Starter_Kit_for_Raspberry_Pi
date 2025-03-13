@@ -64,4 +64,9 @@ Java language tutorial
    codes/java-lang/Hygrothermograph_DHT11.rst
    codes/java-lang/Matrix_Keypad.rst
    codes/java-lang/Ultrasonic_Ranging.rst
+
+.. toctree::
+   :titlesonly:
+   :caption: What's Next?
+   
    codes/common/WhatsNext.rst

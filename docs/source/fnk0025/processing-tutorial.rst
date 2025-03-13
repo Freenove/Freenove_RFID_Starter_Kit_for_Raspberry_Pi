@@ -41,4 +41,9 @@ Processing IDE tutorial
    codes/processing-lang/PongGame.rst
    codes/processing-lang/SnakeGame.rst
    codes/processing-lang/TetrisGame.rst
-   codes/common/WhatsNext.rst
+
+.. toctree::
+   :titlesonly:
+   :caption: What's Next?
+   
+   codes/processing-lang/WhatsNext.rst
