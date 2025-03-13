@@ -63,6 +63,7 @@ Java language tutorial
    codes/java-lang/LCD1602.rst
    codes/java-lang/Hygrothermograph_DHT11.rst
    codes/java-lang/Matrix_Keypad.rst
+   codes/java-lang/Infrared_Motion_Sensor.rst
    codes/java-lang/Ultrasonic_Ranging.rst
 
 .. toctree::
