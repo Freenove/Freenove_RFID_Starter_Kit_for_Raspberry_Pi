@@ -90,6 +90,7 @@ This RFID Module uses MFRC522 as the control chip, and SPI (Peripheral Interface
      - 5%-95%(Relative humidity)
 
 Mifare1 S50 Card
+----------------------------------------------------------------
 
 Mifare S50 is often called Mifare Standard with the capacity of 1K bytes. And each card has a 4-bytes global unique identifier number (USN/UID), which can be rewritten 100 thousand times and read infinite times. Its storage period can last for 10 years.
 
@@ -241,13 +242,15 @@ Enable SPI
 
 The SPI interface of raspberry pi is closed by default. You need to open it manually. You can enable the SPI interface in the following way.
 
+Type the following command in the terminal:
+
 .. code-block:: console    
     
-    $ Type the following command in the terminal:
+    $ sudo raspi-config
 
 Then open the following dialog box:
 
-.. image:: ../_static/imgs/dialog_box.png
+.. image:: ../_static/imgs/dialog_box1.png
     :align: center
 
 Choose "5 Interfacing Options"->"P4 SPI"->"Yes"->"Finish” in order and then restart your RPi. Then the SPI module is started.
