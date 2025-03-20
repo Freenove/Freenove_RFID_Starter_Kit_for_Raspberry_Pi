@@ -31,7 +31,6 @@ This product provides the following online documents.
 
 .. toctree::
    :maxdepth: 1
-   :titlesonly:
    :caption: FNK0025
     
    fnk0025/c-lang-tutorial.rst
