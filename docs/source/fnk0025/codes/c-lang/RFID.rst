@@ -55,6 +55,7 @@ This RFID Module uses MFRC522 as the control chip, and SPI (Peripheral Interface
 
 .. list-table::
    :align: center
+   :width: 80%
    :header-rows: 0
    :class: product-table
 
@@ -74,7 +75,7 @@ This RFID Module uses MFRC522 as the control chip, and SPI (Peripheral Interface
      - 13.56MHz
 
    * - Supported card type
-     - Mifare1 S50、Mifare1 S70、Mifare Ultralight、Mifare Pro、Mifare Desfire ghhhhhhhhhhhhhhhhhhhhhhhhh
+     - Mifare1 S50、Mifare1 S70、Mifare Ultralight、Mifare Pro、Mifare Desfire
 
    * - Size
      - 40mmX60mm
@@ -185,7 +186,7 @@ And each block contains 16 bytes (Byte0-Byte15), 64*16=1024. As is shown in the 
      - control block
      - 63
     
-Each sector has a set of independent password and access control put in its last block, that is, Block 3, which is also known as sector trailer. Sector 0, block 0 (namely absolute address 0) of S50 is used to store the card serial number and vendor code, which has been solidified and can’t be changed. Except the manufacturer and the control block, the rest of the cards are data blocks, which can be used to store data. Data block can be used for two kinds of applications:
+Each sector has a set of independent password and access control put in its last block, that is, Block 3, which is also known as sector trailer. Sector 0, block 0 (namely absolute address 0) of S50 is used to store the card serial number and vendor code, which has been solidified and can't be changed. Except the manufacturer and the control block, the rest of the cards are data blocks, which can be used to store data. Data block can be used for two kinds of applications:
 
 (1) used as general data storage and can be operated for reading and writing data.
 
@@ -303,7 +304,7 @@ After the program is executed, the following contents will be displayed in the t
 .. image:: ../_static/imgs/RFID_Code.png
     :align: center
 
-Here, type the command “quit” to exit the program.
+Here, type the command "quit" to exit the program.
 
 Type command "scan", and then the program begins to detect whether there is a card close to the sensing area of MFRC522 reader. Place a M1-S50 card in the sensing area. The following results indicate that the M1-S50 card has been detected, the UID of which is E6CF5C8EFB (HEX).
 
@@ -315,14 +316,14 @@ When the Card is placed in the sensing area, you can read and write the card wit
 .. image:: ../_static/imgs/RFID_Code_2.png
     :align: center
 
-In the command read<blockstart>, the parameter blockstart is the address of the data block, and the range is 0-63. This command is used to display all the data from blockstart address to the end of the sector. For example, sector 0 contains data block 0,1,2,3. Using the command “read 0” can display all contents of data block 0,1,2,3. Using the command “read 1” can display all contents of data block 1,2,3. As is shown below:   
+In the command read<blockstart>, the parameter blockstart is the address of the data block, and the range is 0-63. This command is used to display all the data from blockstart address to the end of the sector. For example, sector 0 contains data block 0,1,2,3. Using the command "read 0" can display all contents of data block 0,1,2,3. Using the command "read 1" can display all contents of data block 1,2,3. As is shown below:   
 
 .. image:: ../_static/imgs/RFID_Code_3.png
     :align: center
 
-Command “dump” is used to display the content of all data blocks in all sectors.
+Command "dump" is used to display the content of all data blocks in all sectors.
 
-Command <address> <data> is used to write “data" to data block with address “address”, where the address range is 0-63 and the data length is 0-16. For example, if you want to write the string "Freenove" to the data block with address “1”, you can type the following command.
+Command <address> <data> is used to write "data" to data block with address "address", where the address range is 0-63 and the data length is 0-16. For example, if you want to write the string "Freenove" to the data block with address "1", you can type the following command.
 
 .. code-block:: console    
     
@@ -354,7 +355,7 @@ Read the contents of data blocks in this sector again to check whether the data 
 .. image:: ../_static/imgs/RFID_Code_7.png
     :align: center
 
-Command “halt” is used to quit the selection state of the card.
+Command "halt" is used to quit the selection state of the card.
 
 .. image:: ../_static/imgs/RFID_Code_8.png
     :align: center

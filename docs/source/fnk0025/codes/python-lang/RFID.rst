@@ -187,7 +187,7 @@ And each block contains 16 bytes (Byte0-Byte15), 64*16=1024. As is shown in the 
      - control block
      - 63
     
-Each sector has a set of independent password and access control put in its last block, that is, Block 3, which is also known as sector trailer. Sector 0, block 0 (namely absolute address 0) of S50 is used to store the card serial number and vendor code, which has been solidified and can’t be changed. Except the manufacturer and the control block, the rest of the cards are data blocks, which can be used to store data. Data block can be used for two kinds of applications:
+Each sector has a set of independent password and access control put in its last block, that is, Block 3, which is also known as sector trailer. Sector 0, block 0 (namely absolute address 0) of S50 is used to store the card serial number and vendor code, which has been solidified and can't be changed. Except the manufacturer and the control block, the rest of the cards are data blocks, which can be used to store data. Data block can be used for two kinds of applications:
 
 1. used as general data storage and can be operated for reading and writing data.
 
@@ -219,17 +219,17 @@ By default, after verifying password A or password B, we can do reading or writi
 
 For Mifare1 S50 card equipped in Freenove RFID Kit, the default password A and B are both FFFFFFFFFFFF. 
 
-+------------------------------------------------------------------------------------------------+
-|   Schematic diagram                                                                            |
-|                                                                                                |
-|   |RFID_Sc|                                                                                    |
-+------------------------------------------------------------------------------------------------+
-|   Hardware connection. If you need any support,please feel free to contact us via:             |
-|                                                                                                |
-|   support@freenove.com                                                                         | 
-|                                                                                                |
-|   |RFID_Fr|                                                                                    |
-+------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------+
+|   Schematic diagram                                                               |
+|                                                                                   |
+|   |RFID_Sc|                                                                       |
++-----------------------------------------------------------------------------------+
+|   Hardware connection. If you need any support,please feel free to contact us via:|
+|                                                                                   |
+|   support@freenove.com                                                            | 
+|                                                                                   |
+|   |RFID_Fr|                                                                       |
++-----------------------------------------------------------------------------------+
 
 .. |RFID_Sc| image:: ../_static/imgs/RFID_Sc.png
 .. |RFID_Fr| image:: ../_static/imgs/RFID_Fr.png
@@ -253,7 +253,7 @@ Then open the following dialog box:
 .. image:: ../_static/imgs/dialog_box1.png
     :align: center
 
-Choose "5 Interfacing Options"->"P4 SPI"->"Yes"->"Finish” in order and then restart your RPi. Then the SPI module is started.
+Choose "5 Interfacing Options"->"P4 SPI"->"Yes"->"Finish" in order and then restart your RPi. Then the SPI module is started.
 
 Type the following command to check whether the module SPI is loaded successfully:
 
@@ -299,7 +299,7 @@ After the program is executed, the following contents will be displayed in the t
 .. image:: ../_static/imgs/py_RFID_code.png
     :align: center
 
-Here, type the command “quit” to exit the program.
+Here, type the command "quit" to exit the program.
 
 Type command "scan", then the program begins to detect whether there is a card close to the sensing area of MFRC522 reader. Place a M1-S50 card in the sensing area. The following results indicate that the M1-S50 card has been detected, the UID of which is E6CF5C8EFB (HEX).
 
@@ -313,14 +313,14 @@ When the Card is placed in the sensing area, you can read and write the card wit
 
 In the command read<blockstart>, the parameter blockstart is the address of the data block, and the range is 0-63. As is shown below:   
 
-In the command read<blockstart>, the parameter blockstart is the address of the data block, and the range is 0-63. This command is used to read the data of data block with address “blockstart”. For example, using command “read 0” can display the content of data block 0. Using the command “read 1” can display the content of data block 1. As is shown below:   
+In the command read<blockstart>, the parameter blockstart is the address of the data block, and the range is 0-63. This command is used to read the data of data block with address "blockstart". For example, using command "read 0" can display the content of data block 0. Using the command "read 1" can display the content of data block 1. As is shown below:   
 
 .. image:: ../_static/imgs/py_RFID_code_3.png
     :align: center
 
-Command “dump” is used to display the content of all data blocks in all sectors.
+Command "dump" is used to display the content of all data blocks in all sectors.
 
-Command <address> <data> is used to write “data" to data block with address “address”, where the address range is 0-63 and the data length is 0-16. In the process of writing data to the data block, both the contents of data block before written and after written will be displayed. For example, if you want to write the string "Freenove" to the data block with address “1”, you can type the following command.
+Command <address> <data> is used to write "data" to data block with address "address", where the address range is 0-63 and the data length is 0-16. In the process of writing data to the data block, both the contents of data block before written and after written will be displayed. For example, if you want to write the string "Freenove" to the data block with address "1", you can type the following command.
 
 .. code-block:: console
 
@@ -329,7 +329,7 @@ Command <address> <data> is used to write “data" to data block with address �
 .. image:: ../_static/imgs/py_RFID_code_4.png
     :align: center
 
-Command “clean <address>” is used remove the contents of the data block with address "address". For example, if you want to clear the contents of the data block 1 that has just been written, you can type the following command.
+Command "clean <address>" is used remove the contents of the data block with address "address". For example, if you want to clear the contents of the data block 1 that has just been written, you can type the following command.
 
 .. code-block:: console
 
@@ -338,7 +338,7 @@ Command “clean <address>” is used remove the contents of the data block with
 .. image:: ../_static/imgs/py_RFID_code_5.png
     :align: center
 
-Command “halt” is used to quit the selection state of the card.
+Command "halt" is used to quit the selection state of the card.
 
 .. image:: ../_static/imgs/py_RFID_code_6.png
     :align: center
@@ -352,6 +352,7 @@ The following is the program code :
 In the code, first create an MFRC522 class object.
 
 .. code-block:: python
+    :linenos: 
 
     mfrc = MFRC522.MFRC522()
 
