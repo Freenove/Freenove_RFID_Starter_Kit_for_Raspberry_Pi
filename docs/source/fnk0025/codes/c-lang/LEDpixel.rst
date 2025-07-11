@@ -6,7 +6,7 @@ In this chapter, we will learn Freenove 8 RGB LED Module.
 
  .. note::
 
-    if your Raspberry PI is :red:`Raspberry Pi5`, skip 32.1 and 32.2 and look at 32.3 instead. Because 32.1 and 32.2 use the rpi_ws2812 library, they are not compatible with Raspberry Pi5.
+    **If your Raspberry PI System is Bookworm, skip 32.1 and 32.2 and look at 32.3 instead. Because 32.1 and 32.2 use the rpi_ws2812 library, they are not compatible with Raspberry Pi5.**
 
 Project LEDpixel
 ****************************************************************
@@ -154,7 +154,7 @@ Before running C code, please install WS281X library.
 
 The installation is completed as shown in the figure below
 
-.. image:: ../_static/imgs/audio.png
+.. image:: ../_static/imgs/Chapter32_00.png
     :align: center
 
 First, observe the project result, and then learn about the code in detail.
