@@ -10,21 +10,26 @@ Project RFID
 
 In this project, we will use RC522 RFID card reader to read and write the M1-S50 card.
 
-+--------------------------------------------------+-------------------------------------------------+
-|1. Raspberry Pi (with 40 GPIO) x1                 |   RC522 module x1                               |
-|                                                  |                                                 |
-|2. GPIO Extension Board & Ribbon Cable x1         |                                                 |
-|                                                  |    |RC522|                                      |
-|3. Breadboard x1                                  |                                                 |
-+--------------------------------------------------+                                                 |
-|Jumper Wires x7                                   |                                                 |          
-|                                                  |                                                 |  
-| |jumper-wire|                                    |                                                 |  
-+--------------------------------------------------+-------------------------------------------------+
-|Mifare1 S50 Standard card x1                      | Mifare1 S50 Non-standard card x1                |          
-|                                                  |                                                 |  
-| |card|                                           |   |Non_card|                                    |  
-+--------------------------------------------------+-------------------------------------------------+
+.. table:: 
+    :class: table-line
+    :width: 80%
+    :align: center
+    
+    +--------------------------------------------------+-------------------------------------------------+
+    |1. Raspberry Pi (with 40 GPIO) x1                 |   RC522 module x1                               |
+    |                                                  |                                                 |
+    |2. GPIO Extension Board & Ribbon Cable x1         |                                                 |
+    |                                                  |    |RC522|                                      |
+    |3. Breadboard x1                                  |                                                 |
+    +--------------------------------------------------+                                                 |
+    |Jumper Wires x7                                   |                                                 |          
+    |                                                  |                                                 |  
+    | |jumper-wire|                                    |                                                 |  
+    +--------------------------------------------------+-------------------------------------------------+
+    |Mifare1 S50 Standard card x1                      | Mifare1 S50 Non-standard card x1                |          
+    |                                                  |                                                 |  
+    | |card|                                           |   |Non_card|                                    |  
+    +--------------------------------------------------+-------------------------------------------------+
 
 .. |jumper-wire| image:: ../_static/imgs/jumper-wire.png
 .. |RC522| image:: ../_static/imgs/RC522.png
@@ -57,7 +62,7 @@ This RFID Module uses MFRC522 as the control chip, and SPI (Peripheral Interface
 .. list-table::
    :align: center
    :header-rows: 0
-   :class: product-table
+   :class: zebra
 
    * - Operating Voltage
      - 13-26mA(DC)\3.3V
@@ -101,7 +106,7 @@ And each block contains 16 bytes (Byte0-Byte15), 64*16=1024. As is shown in the 
 .. list-table::
    :align: center
    :header-rows: 1
-   :class: product-table
+   :class: zebra text-center
 
    * - Sector No. 
      - Block No.
@@ -157,11 +162,11 @@ And each block contains 16 bytes (Byte0-Byte15), 64*16=1024. As is shown in the 
      - control block
      - 7
 
-   * - ******
-     - ****** 
-     - ******
-     - ******
-     - ******
+   * - \.\.\.\.\.\.
+     - \.\.\.\.\.\. 
+     - \.\.\.\.\.\.
+     - \.\.\.\.\.\.
+     - \.\.\.\.\.\.
 
    * - sector 15
      - block 0
@@ -192,12 +197,13 @@ Each sector has a set of independent password and access control put in its last
 1. used as general data storage and can be operated for reading and writing data.
 
 2. used as data value, and can be operated for initializing, adding, subtracting and reading the value.
+
 The sector trailer block in each sector is the control block, including a 6-byte password A, a 4-byte access control and a 6-byte password B. For example, the control block of a brand new card is as follows:
 
 .. list-table::
    :align: center
    :header-rows: 0
-   :class: product-table
+   :class: zebra
 
    * - A0 A1 A2 A3 A4 A5
      - FF 07 80 69
@@ -219,17 +225,22 @@ By default, after verifying password A or password B, we can do reading or writi
 
 For Mifare1 S50 card equipped in Freenove RFID Kit, the default password A and B are both FFFFFFFFFFFF. 
 
-+-----------------------------------------------------------------------------------+
-|   Schematic diagram                                                               |
-|                                                                                   |
-|   |RFID_Sc|                                                                       |
-+-----------------------------------------------------------------------------------+
-|   Hardware connection. If you need any support,please feel free to contact us via:|
-|                                                                                   |
-|   support@freenove.com                                                            | 
-|                                                                                   |
-|   |RFID_Fr|                                                                       |
-+-----------------------------------------------------------------------------------+
+.. table:: 
+    :class: table-line
+    :width: 80%
+    :align: center
+    
+    +-----------------------------------------------------------------------------------+
+    |   Schematic diagram                                                               |
+    |                                                                                   |
+    |   |RFID_Sc|                                                                       |
+    +-----------------------------------------------------------------------------------+
+    |   Hardware connection. If you need any support,please feel free to contact us via:|
+    |                                                                                   |
+    |   support@freenove.com                                                            | 
+    |                                                                                   |
+    |   |RFID_Fr|                                                                       |
+    +-----------------------------------------------------------------------------------+
 
 .. |RFID_Sc| image:: ../_static/imgs/RFID_Sc.png
 .. |RFID_Fr| image:: ../_static/imgs/RFID_Fr.png
@@ -253,7 +264,7 @@ Then open the following dialog box:
 .. image:: ../_static/imgs/dialog_box1.png
     :align: center
 
-Choose "5 Interfacing Options"->"P4 SPI"->"Yes"->"Finish" in order and then restart your RPi. Then the SPI module is started.
+Choose "5 Interfacing Options" -> "P4 SPI" -> "Yes" -> "Finish" in order and then restart your RPi. Then the SPI module is started.
 
 Type the following command to check whether the module SPI is loaded successfully:
 

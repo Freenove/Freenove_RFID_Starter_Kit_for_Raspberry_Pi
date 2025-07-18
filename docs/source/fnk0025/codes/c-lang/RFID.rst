@@ -1,5 +1,5 @@
 ##############################################################################
-Chapter RFIDLEDpixelRotary Encoder
+Chapter RFID
 ##############################################################################
 
 In this chapter, we will learn how to use RFID.
@@ -9,24 +9,29 @@ Project RFID
 
 In this project, we will use RC522 RFID card reader to read and write the M1-S50 card.
 
-+--------------------------------------------------+-------------------------------------------------+
-|1. Raspberry Pi (with 40 GPIO) x1                 |   RC522 module x1                               |
-|                                                  |                                                 |
-|2. GPIO Extension Board & Ribbon Cable x1         |                                                 |
-|                                                  |    |RC522|                                      |
-|3. Breadboard x1                                  |                                                 |
-+--------------------------------------------------+                                                 |
-|Jumper Wires x4                                   |                                                 |          
-|                                                  |                                                 |  
-| |jumper-wire|                                    |                                                 |  
-+--------------------------------------------------+-------------------------------------------------+
-|Mifare1 S50 Standard card x1                      | Mifare1 S50 Non-standard card x1                |          
-|                                                  |                                                 |  
-| |card|                                           |   |Non_card|                                    |  
-+--------------------------------------------------+-------------------------------------------------+
+.. table::
+  :align: center
+  :class: table-line
+  :width: 80%
+
+  +--------------------------------------------------+-------------------------------------------------+
+  |1. Raspberry Pi (with 40 GPIO) x1                 |   RC522 module x1                               |
+  |                                                  |                                                 |
+  |2. GPIO Extension Board & Ribbon Cable x1         |                                                 |
+  |                                                  |    |RC522|                                      |
+  |3. Breadboard x1                                  |                                                 |
+  +--------------------------------------------------+                                                 |
+  |Jumper Wires x4                                   |                                                 |          
+  |                                                  |                                                 |  
+  | |jumper-wire|                                    |                                                 |  
+  +--------------------------------------------------+-------------------------------------------------+
+  |Mifare1 S50 Standard card x1                      | Mifare1 S50 Non-standard card x1                |          
+  |                                                  |                                                 |  
+  | |card|                                           |   |Non_card|                                    |  
+  +--------------------------------------------------+-------------------------------------------------+
 
 .. |jumper-wire| image:: ../_static/imgs/jumper-wire.png
-.. |RC522| image:: ../_static/imgs/34_00.png
+.. |RC522| image:: ../_static/imgs/RC522.png
 .. |card| image:: ../_static/imgs/card.png
 .. |Non_card| image:: ../_static/imgs/Non_card.png
 
@@ -57,7 +62,7 @@ This RFID Module uses MFRC522 as the control chip, and SPI (Peripheral Interface
    :align: center
    :width: 80%
    :header-rows: 0
-   :class: product-table
+   :class: zebra
 
    * - Operating Voltage
      - 13-26mA(DC)\3.3V
@@ -100,7 +105,7 @@ And each block contains 16 bytes (Byte0-Byte15), 64*16=1024. As is shown in the 
 .. list-table::
    :align: center
    :header-rows: 1
-   :class: product-table
+   :class: zebra text-center
 
    * - Sector No. 
      - Block No.
@@ -156,11 +161,11 @@ And each block contains 16 bytes (Byte0-Byte15), 64*16=1024. As is shown in the 
      - control block
      - 7
 
-   * - ******
-     - ****** 
-     - ******
-     - ******
-     - ******
+   * - \.\.\.\.\.\.
+     - \.\.\.\.\.\.
+     - \.\.\.\.\.\.
+     - \.\.\.\.\.\.
+     - \.\.\.\.\.\.
 
    * - sector 15
      - block 0
@@ -195,9 +200,9 @@ The sector trailer block in each sector is the control block, including a 6-byte
 
 .. list-table::
    :align: center
-   :header-rows: 0
-   :class: product-table
-
+   :header-rows: 1
+   :class: zebra text-center
+   
    * - A0 A1 A2 A3 A4 A5
      - FF 07 80 69
      - B0 B1 B2 B3 B4 B5
@@ -212,25 +217,31 @@ For more details about how to set data blocks and control blocks, please refer t
 
 By default, after verifying password A or password B, we can do reading or writing operation to data blocks. And after verifying password A, we can do reading or writing operation to control blocks. But password A can never be read, so if you choose to verify password A but forget the password A, the block will never be able to read again.
 
-.. hint:: 
-    :red:`If you have any concerns, please contact us via:` support@freenove.com
+.. attention:: 
+
+    :red:`It is highly recommended that beginners should not try to change the contents of control blocks.`
 
 For Mifare1 S50 card equipped in Freenove RFID Kit, the default password A and B are both FFFFFFFFFFFF. 
 
 Circuit
 ============================
 
-+------------------------------------------------------------------------------------------------+
-|   Schematic diagram                                                                            |
-|                                                                                                |
-|   |RFID_Sc|                                                                                    |
-+------------------------------------------------------------------------------------------------+
-|   Hardware connection. If you need any support,please feel free to contact us via:             |
-|                                                                                                |
-|   support@freenove.com                                                                         | 
-|                                                                                                |
-|   |RFID_Fr|                                                                                    |
-+------------------------------------------------------------------------------------------------+
+.. table::
+  :align: center
+  :class: table-line
+  :width: 80%
+
+  +------------------------------------------------------------------------------------------------+
+  |   Schematic diagram                                                                            |
+  |                                                                                                |
+  |   |RFID_Sc|                                                                                    |
+  +------------------------------------------------------------------------------------------------+
+  |   Hardware connection. If you need any support,please feel free to contact us via:             |
+  |                                                                                                |
+  |   support@freenove.com                                                                         | 
+  |                                                                                                |
+  |   |RFID_Fr|                                                                                    |
+  +------------------------------------------------------------------------------------------------+
 
 .. |RFID_Sc| image:: ../_static/imgs/RFID_Sc.png
 .. |RFID_Fr| image:: ../_static/imgs/RFID_Fr.png
@@ -342,6 +353,8 @@ The following results indicate that the string "Freenove" has been written succe
 
 .. image:: ../_static/imgs/RFID_Code_5.png
     :align: center
+
+Command “clean <address>” is used to remove the contents of the data block with address "address". For example, if you want to clear the contents of the data block 1 that has just been written, you can type the following command.
 
 .. code-block:: console    
     
